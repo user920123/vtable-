@@ -1,5 +1,5 @@
 <template>
-  <div @click="handleClick" class="btn">点击这里更新columns（将横向滚动条拖到最末端 再点击此处就会报错 横向滚动条如果处于最左侧时 更新则不报错）</div>
+  <div @click="handleClick" class="btn">点击这里更新columns（将横向滚动条拖到最末端 再点击此处进行更新 表格最后一列就会渲染不全 横向滚动条如果处于最左侧时 更新则没问题）</div>
   <div class="data_table" ref="tableRef" :id="id"></div>
 </template>
 <script setup>
@@ -8,7 +8,7 @@ import {
 } from 'vue'
 import * as VTable from '@visactor/vtable';
 
-const id = 'data_table' 
+const id = 'data_table'
 
 let container = null
 
@@ -25,10 +25,9 @@ const handleClick = () => {
   for (let i = 0; i < 30; i++) {
     arr.push({
       field: i + '',
-      title: i + ''
-
+      title: i
+      // title: '第'+i+'列' 
     })
-
   }
   instance.updateColumns(arr)
 
@@ -55,7 +54,7 @@ const setData = () => {
       obj[cols[x].field]=x+','+i
 
     }
-   
+
     rows.push(obj)
   }
   return{
@@ -112,5 +111,4 @@ onMounted(() => {
   margin: 100px 0 50px;
 }
 </style>
-
 
